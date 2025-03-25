@@ -10,17 +10,20 @@ fetch('https://jsonplaceholder.typicode.com/users')
         data.forEach(element => {
             listaUsuarios.innerHTML += `
             <div id="card">
-              <img src="" alt=""/>
-              <div id="datosPersonales">
-                <li><strong>Nombre:</strong>${element.name}</li>
-                <p><strong>Edad:</strong></p>
-                <p><strong>Username:</strong>${element.username}</p>
-                <p><strong>Teléfono:</strong>${element.phone}</p>
-                <p><strong>Email:</strong>${element.email}</p>
+              <div id="img">
+                <li><img src="./assets/img/${element.id}.jpeg" alt="Foto de ${element.name}"/></li>
               </div>
-              <p><strong>Compañía:</strong>${element.company.name}</p>
-              <p><strong>Dirección:</strong>${element.address.street},${element.address.suite},${element.address.city}</p>
-
+              <div id="datosPersonales">
+                <p><strong>Nombre:</strong> ${element.name} <br>
+                <strong>Edad:</strong><br>
+                <strong>Username:</strong> ${element.username}<br>
+                <strong>Teléfono:</strong> ${element.phone}<br>
+                <strong>Email:</strong> ${element.email}</p><br>
+              </div>
+              <div id="datosCompañia">
+                <p><strong>Compañía:</strong> ${element.company.name}</p>
+                <p><strong>Dirección:</strong> ${element.address.street}, ${element.address.suite}, ${element.address.city}</p>
+              </div>
             </div>`
 
         })

@@ -10,4 +10,49 @@ h1 {
   color: #333;
 }
 
+#img {
+  width: 100px;
+  height: 100px;
+}
+#card{
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 10px;
+  display: inline-block;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+#img {
+  margin: 10px;
+  display: inline-block;
+  
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}
+#datosPersonales {
+  padding: 2px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+  font-size: 11px;
+  flex: 1;
+  display: inline-block;
+  justify-content: flex-start;
+}
+
+#datosCompañia {
+  font-size: 12px;
+
+}#listaUsuarios {
+  list-style: none;
+}
+
+    
+
 
