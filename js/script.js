@@ -1,30 +1,41 @@
 const listaUsuarios = document.getElementById('listaUsuarios');
+const min = 18;
+const max = 65;
+const ageRandom = () => Math.floor(Math.random()*(max - min) - min);
 
-fetch('https://jsonplaceholder.typicode.com/users')
+function getUsers(){
+  return fetch('https://jsonplaceholder.typicode.com/users')
     .then ((response) =>{
         if(!response.ok) {
-            throw new Error('Ha sido imposible cargar los datos');
+            throw new Error(`Error: ${response.status}`);
         }return response.json();
     })  
-    .then ((data) => {
-        data.forEach(element => {
-            listaUsuarios.innerHTML += `
-            <div id="card">
-              <div id="img">
-                <li><img src="./assets/img/${element.id}.jpeg" alt="Foto de ${element.name}"/></li>
-              </div>
-              <div id="datosPersonales">
-                <p><strong>Nombre:</strong> ${element.name} <br>
-                <strong>Edad:</strong><br>
-                <strong>Username:</strong> ${element.username}<br>
-                <strong>Teléfono:</strong> ${element.phone}<br>
-                <strong>Email:</strong> ${element.email}</p><br>
-              </div>
-              <div id="datosCompañia">
-                <p><strong>Compañía:</strong> ${element.company.name}</p>
-                <p><strong>Dirección:</strong> ${element.address.street}, ${element.address.suite}, ${element.address.city}</p>
-              </div>
-            </div>`
+  }
 
-        })
-    }) 
+  getUsers().then ((data) => {
+    data.forEach(user => {
+      const {id} = user;
+      const{street, suite, city} = user.address;
+      const newUser = {
+        ...user,
+        age: ageRandom(),
+        image:`../assets/img/${id}.jpeg`,
+        address:`${street} ${suite} ${city}`
+      }
+      const {name, age, username, image, phone, email, address} = newUser;
+        listaUsuarios.innerHTML += template(name, age, username, image, phone, email, address); 
+       })
+}) .catch (error => console.error(error))
+
+  function template (name, age, username, image, phone, email,address) {
+     return `<li>
+        <img src=${image} alt=${name}/>
+        <h2>Name: ${name}</h2>
+        <p>Username: ${username}</p>
+        <p>Age: ${age}</p>
+        <p>Phone: ${phone}</p>
+        <p>Email: ${email}</p>
+        <p>Address: ${address}</p>
+      </li>
+    `
+  }
